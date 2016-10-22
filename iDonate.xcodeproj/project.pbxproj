@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		A6B596981DB5E94D00324D11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B596971DB5E94D00324D11 /* AppDelegate.swift */; };
-		A6B5969A1DB5E94D00324D11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B596991DB5E94D00324D11 /* ViewController.swift */; };
+		A6B5969A1DB5E94D00324D11 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B596991DB5E94D00324D11 /* CameraViewController.swift */; };
 		A6B5969D1DB5E94D00324D11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6B5969B1DB5E94D00324D11 /* Main.storyboard */; };
 		A6B5969F1DB5E94D00324D11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6B5969E1DB5E94D00324D11 /* Assets.xcassets */; };
 		A6B596A21DB5E94D00324D11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6B596A01DB5E94D00324D11 /* LaunchScreen.storyboard */; };
 		A6B596AD1DB5E94D00324D11 /* iDonateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B596AC1DB5E94D00324D11 /* iDonateTests.swift */; };
 		A6B596B81DB5E94D00324D11 /* iDonateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B596B71DB5E94D00324D11 /* iDonateUITests.swift */; };
+		A6E1459E1DBB2BBB00B6560D /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1459D1DBB2BBB00B6560D /* BarcodeScannerView.swift */; };
+		A6E145A01DBB323900B6560D /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1459F1DBB323900B6560D /* SelectionViewController.swift */; };
+		A6E145A21DBB41B800B6560D /* InsertAddress.js in Resources */ = {isa = PBXBuildFile; fileRef = A6E145A11DBB41B800B6560D /* InsertAddress.js */; };
+		A6E145A41DBB444800B6560D /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E145A31DBB444800B6560D /* AddressTableViewCell.swift */; };
+		A6E145A61DBB464000B6560D /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E145A51DBB464000B6560D /* Address.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +41,7 @@
 /* Begin PBXFileReference section */
 		A6B596941DB5E94D00324D11 /* iDonate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDonate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6B596971DB5E94D00324D11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A6B596991DB5E94D00324D11 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A6B596991DB5E94D00324D11 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		A6B5969C1DB5E94D00324D11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6B5969E1DB5E94D00324D11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6B596A11DB5E94D00324D11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +52,11 @@
 		A6B596B31DB5E94D00324D11 /* iDonateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iDonateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6B596B71DB5E94D00324D11 /* iDonateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iDonateUITests.swift; sourceTree = "<group>"; };
 		A6B596B91DB5E94D00324D11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6E1459D1DBB2BBB00B6560D /* BarcodeScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
+		A6E1459F1DBB323900B6560D /* SelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		A6E145A11DBB41B800B6560D /* InsertAddress.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = InsertAddress.js; sourceTree = "<group>"; };
+		A6E145A31DBB444800B6560D /* AddressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
+		A6E145A51DBB464000B6560D /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +108,16 @@
 			isa = PBXGroup;
 			children = (
 				A6B596971DB5E94D00324D11 /* AppDelegate.swift */,
-				A6B596991DB5E94D00324D11 /* ViewController.swift */,
+				A6B596991DB5E94D00324D11 /* CameraViewController.swift */,
+				A6E1459F1DBB323900B6560D /* SelectionViewController.swift */,
 				A6B5969B1DB5E94D00324D11 /* Main.storyboard */,
 				A6B5969E1DB5E94D00324D11 /* Assets.xcassets */,
 				A6B596A01DB5E94D00324D11 /* LaunchScreen.storyboard */,
 				A6B596A31DB5E94D00324D11 /* Info.plist */,
+				A6E1459D1DBB2BBB00B6560D /* BarcodeScannerView.swift */,
+				A6E145A11DBB41B800B6560D /* InsertAddress.js */,
+				A6E145A31DBB444800B6560D /* AddressTableViewCell.swift */,
+				A6E145A51DBB464000B6560D /* Address.swift */,
 			);
 			path = iDonate;
 			sourceTree = "<group>";
@@ -237,6 +252,7 @@
 			files = (
 				A6B596A21DB5E94D00324D11 /* LaunchScreen.storyboard in Resources */,
 				A6B5969F1DB5E94D00324D11 /* Assets.xcassets in Resources */,
+				A6E145A21DBB41B800B6560D /* InsertAddress.js in Resources */,
 				A6B5969D1DB5E94D00324D11 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,7 +278,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6B5969A1DB5E94D00324D11 /* ViewController.swift in Sources */,
+				A6E145A61DBB464000B6560D /* Address.swift in Sources */,
+				A6E1459E1DBB2BBB00B6560D /* BarcodeScannerView.swift in Sources */,
+				A6E145A01DBB323900B6560D /* SelectionViewController.swift in Sources */,
+				A6E145A41DBB444800B6560D /* AddressTableViewCell.swift in Sources */,
+				A6B5969A1DB5E94D00324D11 /* CameraViewController.swift in Sources */,
 				A6B596981DB5E94D00324D11 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +534,7 @@
 				A6B596BE1DB5E94D00324D11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A6B596BF1DB5E94D00324D11 /* Build configuration list for PBXNativeTarget "iDonateTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +543,7 @@
 				A6B596C11DB5E94D00324D11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A6B596C21DB5E94D00324D11 /* Build configuration list for PBXNativeTarget "iDonateUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +552,7 @@
 				A6B596C41DB5E94D00324D11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
