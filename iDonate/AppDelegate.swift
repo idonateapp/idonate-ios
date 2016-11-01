@@ -16,6 +16,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        var storyboard: UIStoryboard
+        
+        // instantiate the `UIWindow`
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // Get the model name based in the extension.
+        let modelName = UIDevice.current.modelName
+        
+        // If the modelName variable contains the string "iPhone 6" inside.
+        if (modelName.contains("iPhone 6 Plus")) {
+            storyboard = UIStoryboard(name: "MainiPhonePlus", bundle: nil)
+            self.window!.rootViewController = storyboard.instantiateInitialViewController()
+        }
+        else{
+            storyboard = UIStoryboard(name: "Main", bundle: nil)
+            self.window!.rootViewController = storyboard.instantiateInitialViewController()
+        }
+        
+        self.window!.makeKeyAndVisible()
+        
+        
         return true
     }
 

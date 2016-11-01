@@ -136,4 +136,7 @@ class BarcodeScannerView: UIView, AVCaptureMetadataOutputObjectsDelegate, AVCapt
     fileprivate func unhighlight() {
         //borderColor = unhighlightedBorderColor!
     }
+    var prefersStatusBarHidden: Bool {
+        return true
+    }
 }

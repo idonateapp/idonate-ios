@@ -1,88 +1,106 @@
+
+
 //
-//  SelectionViewController.swift
+//  SelectViewController.swift
 //  iDonate
 //
-//  Created by Ronak Shah on 10/21/16.
+//  Created by Ronak Shah on 10/30/16.
 //  Copyright © 2016 Ronak Shah. All rights reserved.
 //
 
 import UIKit
 import WebKit
 
-class SelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var webView: UIWebView!
+class SelectionViewController: UIViewController {
     
     var barcode: String = "barcode+invalid"
-    var addressList: [Address] = [Address]()
+    
+    
+    @IBOutlet weak var webView: UIWebView!
+    //Web
+    var webContent: NSString!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadWebView()
-        // Do any additional setup after loading the view.
+        webView.loadRequest(URLRequest(url: URL(string: "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=\(barcode)")!))
+        findProduct()
         
-        //TODO: Implement User Defaults Charity Loading
+        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(SelectionViewController.resetMem), userInfo: nil, repeats: true)
         
-        //temp fix: sample address list
-        addressList = [Address(name: "Charity For Hope", addressLine1: "9450 Mira Mesa Blvd", addressLine2: "", state: "CA", city: "San Diego", country: "United States", zip: "92126", number: "(972) 896-5692")]
-    
-        //webview
-        /*
-        let configuration = WKWebViewConfiguration()
-        let controller = WKUserContentController()
-        
-        let scriptSourceCode = "your javascript code here"
-        let script = WKUserScript(source: scriptSourceCode, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: true)
-        controller.addUserScript(script)
-        
-        configuration.userContentController = controller
-        */
+        timer.fire()
     }
-
+    
+    func resetMem() {
+        URLCache.shared.removeAllCachedResponses()
+    }
     override func viewDidAppear(_ animated: Bool) {
-        print("interesting")
+        _ = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(SelectionViewController.injectJS), userInfo: nil, repeats: true)
+        
+        
+    }
+    
+    
+    func injectJS() {
+        let address = (DataManager.getObject(key: "selectedCharity") as! Charity).address
+        let js = "function doWork(){parse(\"\(address.name)\",\"\(address.addressLine1)\",\"\(address.addressLine2)\",\"\(address.city)\",\"\(address.state)\",\"\(address.zip)\",\"\(address.number)\",\"\(address.country)\"),repeater=setTimeout(doWork(),1500)}function selectItemByValue(a,b){for(var c=0;c<a.options.length;c++)a.options[c].value==b&&(a.selectedIndex=c)}function parse(a,b,c,d,e,f,g,h){document.getElementById(\"enterAddressFullName\").value=a,document.getElementById(\"enterAddressAddressLine1\").value=b,document.getElementById(\"enterAddressAddressLine2\").value=c,document.getElementById(\"enterAddressCity\").value=d,document.getElementById(\"enterAddressStateOrRegion\").value=e,document.getElementById(\"enterAddressPostalCode\").value=f,document.getElementById(\"enterAddressPhoneNumber\").value=g;var i=document.getElementById(\"enterAddressCountryCode\");selectItemByValue(i,h)}var repeater;doWork();"
+        
+        //let js = "function doWork(){parse(\"\(address.name)\",\"\(address.addressLine1)\",\"\(address.addressLine2)\",\"\(address.city)\",\"\(address.state)\",\"\(address.zip)\",\"\(address.number)\",\"\(address.country)\"),repeater=setTimeout(doWork(),100)}function stuff(){document.getElementById(\"form\").style.display=t?\"none\":\"\",repeater2=setTimeout(stuff(),2e3)}function selectItemByValue(a,b){for(var c=0;c<a.options.length;c++)a.options[c].value==b&&(a.selectedIndex=c)}function parse(a,b,c,d,e,f,g,h){document.getElementById(\"enterAddressFullName\").value=a,document.getElementById(\"enterAddressAddressLine1\").value=b,document.getElementById(\"enterAddressAddressLine2\").value=c,document.getElementById(\"enterAddressCity\").value=d,document.getElementById(\"enterAddressStateOrRegion\").value=e,document.getElementById(\"enterAddressPostalCode\").value=f,document.getElementById(\"enterAddressPhoneNumber\").value=g;var i=document.getElementById(\"enterAddressCountryCode\");selectItemByValue(i,h)}var repeater;doWork();var repeater2,t=!1;stuff()"
+        webView.stringByEvaluatingJavaScript(from: js)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
-    func loadWebView() {
-        let site = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=\(barcode)"
-        webView.loadRequest(URLRequest(url: NSURL(string: site)! as URL))
+    func findProduct() {
+        
+        let wrappedUrl = NSURL(string: "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=\(barcode)")
+        
+        if let url = wrappedUrl {
+            let task = URLSession.shared.dataTask(with: url as URL) { (data, response, error) in //those three vars will be returned from the method
+                
+                //code here will happen when the task is completed
+                if let urlContent = data {
+                    
+                    self.webContent = NSString(data: urlContent, encoding: String.Encoding.utf8.rawValue)
+                    self.parseWebContent()
+                    //print(self.webContent)
+                }
+                else {
+                    //show error
+                }
+            }
+            task.resume()
+        }
+        else {
+            print("404 Page Not Found")
+        }
         
     }
     
-    //MARK: TableView Methods
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addressList.count
+    func parseWebContent() {
+        var components = webContent.components(separatedBy: "data-attribute=")
+        if (components.count <= 2) {}
+        else {
+            components = components[1].components(separatedBy: "data-max-rows=\"0\"")
+            let productName = components[0].replacingOccurrences(of: "\"", with: "")
+            print(productName)
+            
+            var add = true
+            let arr = DataManager.getArray(key: "purchases")
+            for index in (0...arr.count-1) {
+                let p = arr.object(at: index) as! Product
+                if (p.barcode == barcode) {
+                    add = false
+                }
+            }
+            if (add) {
+                let product =  Product(name: productName, barcode: barcode)
+                arr.add(product)
+                DataManager.saveArray(array: arr, key: "purchases")
+            }
+        }
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "addressCell") as! AddressTableViewCell
-        let add = addressList[indexPath.row]
-        cell.loadAddress(add: add)
-        return cell
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let address = addressList[indexPath.row]
-        
-        
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+

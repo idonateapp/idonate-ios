@@ -1,5 +1,5 @@
 //
-//  AddressTableViewCell.swift
+//  CharityTableViewCell.swift
 //  iDonate
 //
 //  Created by Ronak Shah on 10/21/16.
@@ -8,13 +8,12 @@
 
 import UIKit
 
-class AddressTableViewCell: UITableViewCell {
+class CharityTableViewCell: UITableViewCell {
 
     @IBOutlet weak var addressNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var addressCityStateLabel: UILabel!
     @IBOutlet weak var addressCountryZipLabel: UILabel!
-    var address: Address!
+    var charity: Charity!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,16 +22,19 @@ class AddressTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
-    func loadAddress(add: Address) {
-        self.addressNameLabel.text! = add.name
-        self.addressLabel.text! = "\(add.addressLine1), \(add.addressLine2)"
-        self.addressCityStateLabel.text! = "\(add.city) \(add.state)"
-        self.addressCountryZipLabel.text! = "\(add.country) \(add.zip)"
-        self.address = add
-
+    func loadCharity(c: Charity) {
+        
+        let a = c.address
+        self.addressNameLabel.text! = a.name
+        self.addressLabel.text! = "\(a.addressLine1) \(a.addressLine2)"
+        self.addressCountryZipLabel.text! = "\(a.city) \(a.state)"
+        self.addressCountryZipLabel.text! = "\(a.country) \(a.zip)"
+        self.charity = c
     }
+    
+    
+    
 }
