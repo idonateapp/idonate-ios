@@ -89,6 +89,9 @@ class SelectionViewController: UIViewController {
             
             var add = true
             let arr = DataManager.getArray(key: "purchases")
+            if (arr.count == 0) {
+                return
+            }
             for index in (0...arr.count-1) {
                 let p = arr.object(at: index) as! Product
                 if (p.barcode == barcode) {

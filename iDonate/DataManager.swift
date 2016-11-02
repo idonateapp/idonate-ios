@@ -21,7 +21,9 @@ class DataManager {
             return array
         }
         else {
-            return NSMutableArray()
+            let array = NSMutableArray()
+            saveArray(array: array, key: key)
+            return array
         }
     }
     static func saveObject(object: AnyObject, key: String) {
